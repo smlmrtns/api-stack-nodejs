@@ -18,7 +18,9 @@ const File = new mongoose.Schema({
 
 File.virtual('url').get(function() {
     let path = encodeURIComponent(this.path);
-    return `http://localhost:8000/files/${path}`;
+    const url = process.env.URL || 'http://localhost:8000';
+    
+    return `${url}/files/${path}`;
 });
 
 module.exports = mongoose.model('File', File);
